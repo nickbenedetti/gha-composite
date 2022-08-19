@@ -14,7 +14,8 @@ runs:
   steps:
     - run: echo Hello ${{ inputs.who-to-greet }}.
       shell: bash
-    - run: shell-script.sh
+    # https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#runsstepsrun
+    - run: $GITHUB_ACTION_PATH/shell-script.sh ${{ inputs.who-to-greet }}
       shell: bash
     - id: random-number-generator
       run: echo "::set-output name=random-number::$(echo $RANDOM)"
