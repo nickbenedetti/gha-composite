@@ -14,11 +14,14 @@ runs:
   steps:
     - run: echo Hello ${{ inputs.who-to-greet }}.
       shell: bash
-    - run: pwd; ls; echo $GITHUB_ACTION_PATH; find $(pwd) -iname "shell-script.sh" 2>/dev/null; ls "$GITHUB_ACTION_PATH"; chmod +x $GITHUB_ACTION_PATH/shell-script.sh
-      shell: bash
+    # - run: pwd; ls; echo $GITHUB_ACTION_PATH; find $(pwd) -iname "shell-script.sh" 2>/dev/null; ls "$GITHUB_ACTION_PATH"; chmod +x $GITHUB_ACTION_PATH/shell-script.sh
+    #   shell: bash
     # https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#runsstepsrun
-    - run: chmod +x $GITHUB_ACTION_PATH/shell-script.sh; $GITHUB_ACTION_PATH/shell-script.sh ${{ inputs.who-to-greet }}
+    - run: $GITHUB_ACTION_PATH/shell-script.sh "${{ inputs.who-to-greet }}"
       shell: bash
+      env:
+        WHO_GREET: ${{ inputs.who-to-greet }}
+
       # Should be in .github dir?
     - id: random-number-generator
       run: echo "::set-output name=random-number::$(echo $RANDOM)"

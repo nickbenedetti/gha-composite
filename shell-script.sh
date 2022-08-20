@@ -1,5 +1,6 @@
 # echo "${who-to-greet}"
 
-echo Hello ${{ inputs.who-to-greet }}
-echo "using arg"
-echo $1
+echo "Hello ${{ inputs.who-to-greet }}"
+echo "arg 1: ${1} arg 2: ${2}"
+echo "$@"
+
